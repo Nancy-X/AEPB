@@ -1,5 +1,7 @@
 package com.example.AEPB;
 
+import com.example.AEPB.airCoin.AirCoin;
+import com.example.AEPB.exception.CannotCompareException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

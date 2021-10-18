@@ -1,4 +1,6 @@
-package com.example.AEPB;
+package com.example.AEPB.airCoin;
+
+import com.example.AEPB.exception.CannotCompareException;
 
 public class AirCoin {
 
@@ -10,7 +12,7 @@ public class AirCoin {
     private static final String AMOUNT_REGULATION = "amount should be no less than "
             + MIN_AMOUNT + " and no more than " + MAX_AMOUNT;
 
-    AirCoin(int amount) {
+    public AirCoin(int amount) {
         this.amount = amount;
     }
 
