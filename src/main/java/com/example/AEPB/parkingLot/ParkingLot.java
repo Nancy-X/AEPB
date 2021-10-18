@@ -1,5 +1,6 @@
-package com.example.AEPB;
+package com.example.AEPB.parkingLot;
 
+import com.example.AEPB.exception.DuplicateCarException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -7,7 +8,7 @@ import java.util.Map;
 
 public class ParkingLot {
 
-    int MAX_CAPACITY = 50;
+    private static final int MAX_CAPACITY = 50;
 
     private Map<String, ParkingTicket> parkingRecord;
 
@@ -37,19 +38,6 @@ public class ParkingLot {
         parkingRecord.remove(ticket.getLicensePlateNumber());
 
         return true;
-    }
-}
-
-class ParkingTicket {
-
-    private final String licensePlateNumber;
-
-    ParkingTicket(String licensePlateNumber) {
-        this.licensePlateNumber = licensePlateNumber;
-    }
-
-    public String getLicensePlateNumber() {
-        return licensePlateNumber;
     }
 }
 

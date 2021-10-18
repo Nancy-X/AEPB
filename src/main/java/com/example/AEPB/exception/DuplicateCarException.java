@@ -1,7 +1,7 @@
-package com.example.AEPB;
+package com.example.AEPB.exception;
 
 public class DuplicateCarException extends RuntimeException {
-    DuplicateCarException(String msg) {
+    public DuplicateCarException(String msg) {
         super(msg);
     }
 }

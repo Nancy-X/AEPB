@@ -1,5 +1,8 @@
 package com.example.AEPB;
 
+import com.example.AEPB.exception.DuplicateCarException;
+import com.example.AEPB.parkingLot.ParkingLot;
+import com.example.AEPB.parkingLot.ParkingTicket;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,13 +17,19 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_success_when_park_car_given_valid_car_license_number() {
+    void should_get_parking_ticket_when_park_car_given_valid_car_license_number() {
         String licensePlateNumber = "京A88888";
-        Assertions.assertTrue(parkingLot.parkCar(licensePlateNumber));
+        Assertions.assertEquals(parkingLot.parkCar(licensePlateNumber).getLicensePlateNumber(), licensePlateNumber);
     }
 
     @Test
-    void should_fail_when_park_car_given_invalid_car_license_number() {
+    void should_fail_when_park_car_given_null_car_license_number() {
+        String licensePlateNumber = null;
+        Assertions.assertThrows(IllegalArgumentException.class, () -> parkingLot.parkCar(licensePlateNumber));
+    }
+
+    @Test
+    void should_fail_when_park_car_given_empty_car_license_number() {
         String licensePlateNumber = "";
         Assertions.assertThrows(IllegalArgumentException.class, () -> parkingLot.parkCar(licensePlateNumber));
     }
@@ -30,7 +39,7 @@ public class ParkingLotTest {
         givenFullParkingLot();
 
         String licensePlateNumber = "京A88888";
-        Assertions.assertFalse(parkingLot.parkCar(licensePlateNumber));
+        Assertions.assertNull(parkingLot.parkCar(licensePlateNumber));
     }
 
     private void givenFullParkingLot() {
