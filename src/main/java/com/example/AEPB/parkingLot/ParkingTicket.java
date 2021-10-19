@@ -6,8 +6,8 @@ public class ParkingTicket {
     private final String licensePlateNumber;
     private int paringLotNumber;
 
-    public ParkingTicket(String licensePlateNumber) {
-        this.licensePlateNumber = licensePlateNumber;
+    public ParkingTicket() {
+        licensePlateNumber = "";
     }
 
     public ParkingTicket(String licensePlateNumber, int paringLotNumber) {
