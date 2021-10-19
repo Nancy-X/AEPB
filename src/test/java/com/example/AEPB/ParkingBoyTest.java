@@ -1,5 +1,6 @@
 package com.example.AEPB;
 
+import com.example.AEPB.exception.FullParkingLotException;
 import com.example.AEPB.parkingLot.ParkingBoy;
 import com.example.AEPB.parkingLot.ParkingTicket;
 import com.example.AEPB.parkingLot.Vehicle;
@@ -85,9 +86,8 @@ public class ParkingBoyTest {
         Vehicle vehicle = new Vehicle();
 
         makeAllParkingLotsFull(parkingBoy);
-        ParkingTicket ticket = parkingBoy.park(vehicle);
 
-        Assertions.assertEquals(1, ticket.getParingLotNumber());
+        Assertions.assertThrows(FullParkingLotException.class, () -> parkingBoy.park(vehicle));
     }
 
     private void makeAllParkingLotsFull(ParkingBoy parkingBoy) {
@@ -130,7 +130,7 @@ public class ParkingBoyTest {
      * then: 不能取到车
      */
     @Test
-    void should_throw_exception_when_pick_up_car_given_valid_ticket_parking_boy() {
+    void should_throw_exception_when_pick_up_car_given_valid_ticket_to_parking_boy() {
         ParkingTicket ticket = parkingBoy.park(new Vehicle());
 
         Vehicle pickedUpVehicle = parkingBoy.pickUpVehicle(ticket);
@@ -145,10 +145,10 @@ public class ParkingBoyTest {
      * then: 不能取到车
      */
     @Test
-    void should_throw_exception_when_pick_up_car_given_counterfeit_ticket_parking_boy() {
+    void should_throw_exception_when_pick_up_car_given_forged_ticket_to_parking_boy() {
         ParkingTicket ticket = parkingBoy.park(new Vehicle());
 
-        ParkingTicket counterfeitTicket = new ParkingTicket(ticket.getLicensePlateNumber(), ticket.getParingLotNumber());
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parkingBoy.pickUpVehicle(counterfeitTicket));
+        ParkingTicket forgedTicket = new ParkingTicket(ticket.getParingLotNumber());
+        Assertions.assertThrows(IllegalArgumentException.class, () -> parkingBoy.pickUpVehicle(forgedTicket));
     }
 }

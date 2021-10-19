@@ -15,7 +15,7 @@ public class ParkingLotTest {
 
     @BeforeEach
     void setUp() {
-        parkingLot = new ParkingLot();
+        parkingLot = new ParkingLot(1);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_fail_when_park_car_given_null_car_license_number() {
+    void should_fail_when_park_car_given_null_car() {
         Vehicle vehicle = null;
         Assertions.assertThrows(IllegalArgumentException.class, () -> parkingLot.parkCar(vehicle));
     }
@@ -53,7 +53,7 @@ public class ParkingLotTest {
 
 
     @Test
-    void should_success_when_pick_up_car_given_parking_ticket_car_parked_in_the_parking_lot() {
+    void should_success_when_pick_up_car_given_valid_parking_ticket() {
         Vehicle vehicle = new Vehicle();
         ParkingTicket ticket = parkingLot.parkCar(vehicle);
 
@@ -61,10 +61,10 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_throw_exception_when_pick_up_car_given_parking_ticket_car_not_parked_in_the_parking_lot() {
+    void should_throw_exception_when_pick_up_car_given_forged_ticket() {
 
-        ParkingTicket parkingTicket = new ParkingTicket();
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parkingLot.pickUpCar(parkingTicket));
+        ParkingTicket forgedTicket = new ParkingTicket(0);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> parkingLot.pickUpCar(forgedTicket));
     }
 
     @Test

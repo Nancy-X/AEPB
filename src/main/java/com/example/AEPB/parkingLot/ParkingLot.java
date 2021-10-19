@@ -10,12 +10,14 @@ import java.util.Objects;
 
 public class ParkingLot {
 
-    private static final int MAX_CAPACITY = 50;
+    public static final int MAX_CAPACITY = 50;
+    private final int parkingLotIndex;
 
     private Map<ParkingTicket, Vehicle> parkingRecord;
 
-    public ParkingLot() {
-        parkingRecord = new HashMap<>();
+    public ParkingLot(int parkingLotIndex) {
+        this.parkingRecord = new HashMap<>();
+        this.parkingLotIndex = parkingLotIndex;
     }
 
     public ParkingTicket parkCar(Vehicle vehicle) {
@@ -28,7 +30,7 @@ public class ParkingLot {
         if (parkingRecord.size() == MAX_CAPACITY) {
             throw new FullParkingLotException("the parking lot is full!");
         }
-        ParkingTicket ticket = new ParkingTicket();
+        ParkingTicket ticket = new ParkingTicket(parkingLotIndex);
         parkingRecord.put(ticket, vehicle);
         return ticket;
     }
@@ -39,6 +41,10 @@ public class ParkingLot {
         }
 
         return parkingRecord.remove(ticket);
+    }
+
+    public Map<ParkingTicket, Vehicle> getParkingRecord() {
+        return parkingRecord;
     }
 }
 
