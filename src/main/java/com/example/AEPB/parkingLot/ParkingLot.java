@@ -2,7 +2,6 @@ package com.example.AEPB.parkingLot;
 
 import com.example.AEPB.exception.DuplicateCarException;
 import com.example.AEPB.exception.FullParkingLotException;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +44,10 @@ public class ParkingLot {
 
     public Map<ParkingTicket, Vehicle> getParkingRecord() {
         return parkingRecord;
+    }
+
+    public int getEmptyLot() {
+        return MAX_CAPACITY - parkingRecord.size();
     }
 }
 

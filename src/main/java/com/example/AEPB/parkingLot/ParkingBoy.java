@@ -2,20 +2,14 @@ package com.example.AEPB.parkingLot;
 
 import com.example.AEPB.exception.FullParkingLotException;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class ParkingBoy {
 
-    private final List<ParkingLot> parkingLots;
-    static final int PARKING_LOT_COUNT = 10;
+    private final ParkingLots parkingLots;
 
-    public ParkingBoy() {
-        parkingLots = new ArrayList<>(PARKING_LOT_COUNT);
-        for(int i = 0; i < PARKING_LOT_COUNT; i++) {
-            parkingLots.add(new ParkingLot(i + 1));
-        }
+    public ParkingBoy(ParkingLots parkingLots) {
+        this.parkingLots = parkingLots;
     }
 
     public Vehicle pickUpVehicle(ParkingTicket ticket) {
@@ -23,11 +17,11 @@ public class ParkingBoy {
             throw new IllegalArgumentException("Illegal Parking Ticket!");
         }
         int parkingLotIndex = ticket.getParingLotNumber() - 1;
-        return parkingLots.get(parkingLotIndex).pickUpCar(ticket);
+        return parkingLots.getParkingLots().get(parkingLotIndex).pickUpCar(ticket);
     }
 
     public ParkingTicket park(Vehicle vehicle) {
-        for(ParkingLot parkingLot : parkingLots) {
+        for(ParkingLot parkingLot : parkingLots.getParkingLots()) {
             if (parkingLot.getParkingRecord().size() < ParkingLot.MAX_CAPACITY) {
                 return parkingLot.parkCar(vehicle);
             }

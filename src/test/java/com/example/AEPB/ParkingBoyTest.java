@@ -2,6 +2,7 @@ package com.example.AEPB;
 
 import com.example.AEPB.exception.FullParkingLotException;
 import com.example.AEPB.parkingLot.ParkingBoy;
+import com.example.AEPB.parkingLot.ParkingLots;
 import com.example.AEPB.parkingLot.ParkingTicket;
 import com.example.AEPB.parkingLot.Vehicle;
 import org.junit.jupiter.api.Assertions;
@@ -14,7 +15,8 @@ public class ParkingBoyTest {
 
     @BeforeEach
     void setup() {
-        this.parkingBoy = new ParkingBoy();
+
+        this.parkingBoy = new ParkingBoy(new ParkingLots());
     }
 
     /**
