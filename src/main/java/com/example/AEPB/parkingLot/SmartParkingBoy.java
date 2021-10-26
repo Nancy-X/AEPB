@@ -25,7 +25,7 @@ public class SmartParkingBoy {
         if (parkingLotIndex == -1) {
             throw new FullParkingLotException("All parking lots are full!");
         }
-        return parkingLots.getParkingLots().get(parkingLotIndex).parkCar(vehicle);
+        return parkingLots.getParkingLots().get(parkingLotIndex).park(vehicle);
     }
 
     public Vehicle pickup(ParkingTicket parkingTicket) {
@@ -33,6 +33,6 @@ public class SmartParkingBoy {
             throw new IllegalArgumentException("Invalid ParkingTicket!");
         }
         int parkingLotNumber = parkingTicket.getParingLotNumber();
-        return parkingLots.getParkingLots().get(parkingLotNumber - 1).pickUpCar(parkingTicket);
+        return parkingLots.getParkingLots().get(parkingLotNumber - 1).pickUp(parkingTicket);
     }
 }

@@ -1,6 +1,5 @@
 package com.example.AEPB.parkingLot;
 
-import java.util.UUID;
 
 public class ParkingTicket {
     private final int paringLotNumber;

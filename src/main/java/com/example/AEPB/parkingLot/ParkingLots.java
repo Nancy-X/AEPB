@@ -11,7 +11,7 @@ public class ParkingLots {
     public ParkingLots() {
         parkingLots = new ArrayList<>(PARKING_LOT_COUNT);
         for(int i = 0; i < PARKING_LOT_COUNT; i++) {
-            parkingLots.add(new ParkingLot(i + 1));
+            parkingLots.add(new ParkingLot(i + 1, 50));
         }
     }
 

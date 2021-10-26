@@ -17,13 +17,13 @@ public class ParkingBoy {
             throw new IllegalArgumentException("Illegal Parking Ticket!");
         }
         int parkingLotIndex = ticket.getParingLotNumber() - 1;
-        return parkingLots.getParkingLots().get(parkingLotIndex).pickUpCar(ticket);
+        return parkingLots.getParkingLots().get(parkingLotIndex).pickUp(ticket);
     }
 
     public ParkingTicket park(Vehicle vehicle) {
         for(ParkingLot parkingLot : parkingLots.getParkingLots()) {
-            if (parkingLot.getParkingRecord().size() < ParkingLot.MAX_CAPACITY) {
-                return parkingLot.parkCar(vehicle);
+            if (parkingLot.hasEmptyLot()) {
+                return parkingLot.park(vehicle);
             }
         }
         throw new FullParkingLotException("All parking lot is full");

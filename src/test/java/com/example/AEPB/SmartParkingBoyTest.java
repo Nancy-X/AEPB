@@ -1,7 +1,6 @@
 package com.example.AEPB;
 
 import com.example.AEPB.exception.FullParkingLotException;
-import com.example.AEPB.parkingLot.ParkingBoy;
 import com.example.AEPB.parkingLot.ParkingLot;
 import com.example.AEPB.parkingLot.ParkingLots;
 import com.example.AEPB.parkingLot.ParkingTicket;
@@ -10,6 +9,8 @@ import com.example.AEPB.parkingLot.Vehicle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static com.example.AEPB.ParkingLotParkUtil.parkCars;
 
 public class SmartParkingBoyTest {
     ParkingLots parkingLots;
@@ -58,12 +59,6 @@ public class SmartParkingBoyTest {
         ParkingTicket ticket = smartParkingBoy.park(vehicle);
         Assertions.assertEquals(10, ticket.getParingLotNumber());
         Assertions.assertEquals(vehicle, smartParkingBoy.pickup(ticket));
-    }
-
-    private void parkCars(ParkingLot parkingLot, int parkCarCount) {
-        for(int i = 0; i < parkCarCount; i++){
-            parkingLot.parkCar(new Vehicle());
-        }
     }
 
     /**
