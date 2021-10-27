@@ -12,7 +12,7 @@ public class ParkingLot {
     public int capacity;
     private final int parkingLotIndex;
 
-    private Map<ParkingTicket, Vehicle> parkingRecord;
+    private final Map<ParkingTicket, Vehicle> parkingRecord;
 
     public ParkingLot(int parkingLotIndex, int capacity) {
         this.capacity = capacity;
@@ -41,10 +41,6 @@ public class ParkingLot {
         }
 
         return parkingRecord.remove(ticket);
-    }
-
-    public Map<ParkingTicket, Vehicle> getParkingRecord() {
-        return parkingRecord;
     }
 
     public int getEmptyLot() {

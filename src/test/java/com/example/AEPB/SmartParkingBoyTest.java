@@ -2,7 +2,6 @@ package com.example.AEPB;
 
 import com.example.AEPB.exception.FullParkingLotException;
 import com.example.AEPB.parkingLot.ParkingLot;
-import com.example.AEPB.parkingLot.ParkingLots;
 import com.example.AEPB.parkingLot.ParkingTicket;
 import com.example.AEPB.parkingLot.SmartParkingBoy;
 import com.example.AEPB.parkingLot.Vehicle;
@@ -10,15 +9,21 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.example.AEPB.ParkingLotParkUtil.parkCars;
 
 public class SmartParkingBoyTest {
-    ParkingLots parkingLots;
     SmartParkingBoy smartParkingBoy;
+    List<ParkingLot> parkingLots;
 
     @BeforeEach
     void setup() {
-        parkingLots = new ParkingLots();
+        parkingLots = new ArrayList<>(10);
+        for(int i = 0; i < 10; i++) {
+            parkingLots.add(new ParkingLot(i + 1, 50));
+        }
         smartParkingBoy = new SmartParkingBoy(parkingLots);
     }
 
@@ -44,16 +49,16 @@ public class SmartParkingBoyTest {
      */
     @Test
     void should_park_in_parking_lot_10_when_park_given_parking_lot_10_has_most_empty_positions_and_parked_by_smart_parking_boy() {
-        parkCars(parkingLots.getParkingLots().get(0), 49);
-        parkCars(parkingLots.getParkingLots().get(1), 48);
-        parkCars(parkingLots.getParkingLots().get(2), 47);
-        parkCars(parkingLots.getParkingLots().get(3), 46);
-        parkCars(parkingLots.getParkingLots().get(4), 45);
-        parkCars(parkingLots.getParkingLots().get(5), 44);
-        parkCars(parkingLots.getParkingLots().get(6), 43);
-        parkCars(parkingLots.getParkingLots().get(7), 42);
-        parkCars(parkingLots.getParkingLots().get(8), 41);
-        parkCars(parkingLots.getParkingLots().get(9), 40);
+        parkCars(parkingLots.get(0), 49);
+        parkCars(parkingLots.get(1), 48);
+        parkCars(parkingLots.get(2), 47);
+        parkCars(parkingLots.get(3), 46);
+        parkCars(parkingLots.get(4), 45);
+        parkCars(parkingLots.get(5), 44);
+        parkCars(parkingLots.get(6), 43);
+        parkCars(parkingLots.get(7), 42);
+        parkCars(parkingLots.get(8), 41);
+        parkCars(parkingLots.get(9), 40);
 
         Vehicle vehicle = new Vehicle();
         ParkingTicket ticket = smartParkingBoy.park(vehicle);
@@ -69,16 +74,16 @@ public class SmartParkingBoyTest {
      */
     @Test
     void should_park_in_parking_lot_9_when_park_given_parking_lot_9_and_parking_lot_10_has_same_empty_positions_and_parked_by_smart_parking_boy() {
-        parkCars(parkingLots.getParkingLots().get(0), 49);
-        parkCars(parkingLots.getParkingLots().get(1), 48);
-        parkCars(parkingLots.getParkingLots().get(2), 47);
-        parkCars(parkingLots.getParkingLots().get(3), 46);
-        parkCars(parkingLots.getParkingLots().get(4), 45);
-        parkCars(parkingLots.getParkingLots().get(5), 44);
-        parkCars(parkingLots.getParkingLots().get(6), 43);
-        parkCars(parkingLots.getParkingLots().get(7), 42);
-        parkCars(parkingLots.getParkingLots().get(8), 41);
-        parkCars(parkingLots.getParkingLots().get(9), 41);
+        parkCars(parkingLots.get(0), 49);
+        parkCars(parkingLots.get(1), 48);
+        parkCars(parkingLots.get(2), 47);
+        parkCars(parkingLots.get(3), 46);
+        parkCars(parkingLots.get(4), 45);
+        parkCars(parkingLots.get(5), 44);
+        parkCars(parkingLots.get(6), 43);
+        parkCars(parkingLots.get(7), 42);
+        parkCars(parkingLots.get(8), 41);
+        parkCars(parkingLots.get(9), 41);
 
         Vehicle vehicle = new Vehicle();
         ParkingTicket ticket = smartParkingBoy.park(vehicle);

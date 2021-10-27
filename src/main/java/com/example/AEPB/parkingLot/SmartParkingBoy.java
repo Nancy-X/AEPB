@@ -2,37 +2,29 @@ package com.example.AEPB.parkingLot;
 
 import com.example.AEPB.exception.FullParkingLotException;
 
-import java.util.Objects;
+import java.util.List;
 
-public class SmartParkingBoy {
+public class SmartParkingBoy extends ParkingBoy {
 
-    private final ParkingLots parkingLots;
-
-    public SmartParkingBoy(ParkingLots parkingLots) {
-        this.parkingLots = parkingLots;
+    public SmartParkingBoy(List<ParkingLot> parkingLots) {
+        super(parkingLots);
     }
 
+    @Override
     public ParkingTicket park(Vehicle vehicle) {
         int parkingLotIndex = -1;
         int emptyLotCount = 0;
-        for(int i = 0; i < 10; i++) {
-            ParkingLot currentParkingLot = parkingLots.getParkingLots().get(i);
-            if(currentParkingLot.getEmptyLot() > emptyLotCount) {
+        for (int i = 0; i < 10; i++) {
+            ParkingLot currentParkingLot = parkingLots.get(i);
+            int currentEmptyLot = currentParkingLot.getEmptyLot();
+            if (currentEmptyLot > emptyLotCount) {
                 parkingLotIndex = i;
-                emptyLotCount = currentParkingLot.getEmptyLot();
+                emptyLotCount = currentEmptyLot;
             }
         }
         if (parkingLotIndex == -1) {
             throw new FullParkingLotException("All parking lots are full!");
         }
-        return parkingLots.getParkingLots().get(parkingLotIndex).park(vehicle);
-    }
-
-    public Vehicle pickup(ParkingTicket parkingTicket) {
-        if (Objects.isNull(parkingTicket) ) {
-            throw new IllegalArgumentException("Invalid ParkingTicket!");
-        }
-        int parkingLotNumber = parkingTicket.getParingLotNumber();
-        return parkingLots.getParkingLots().get(parkingLotNumber - 1).pickUp(parkingTicket);
+        return parkingLots.get(parkingLotIndex).park(vehicle);
     }
 }

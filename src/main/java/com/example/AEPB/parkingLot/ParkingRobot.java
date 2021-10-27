@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ParkingRobot {
 
-    private List<ParkingLot> parkingLotList;
+    private final List<ParkingLot> parkingLotList;
 
     private double vacancyRate = 0;
     private int parkingLotIndex = -1;
@@ -18,12 +18,12 @@ public class ParkingRobot {
     public ParkingTicket park(Vehicle vehicle) {
         for (int i = 0; i < parkingLotList.size(); i++) {
             double currentVacancyRate = parkingLotList.get(i).getVacancyRate();
-            if ( currentVacancyRate > this.vacancyRate) {
+            if (currentVacancyRate > this.vacancyRate) {
                 this.vacancyRate = currentVacancyRate;
                 this.parkingLotIndex = i;
             }
         }
-        if(vacancyRate == 0){
+        if (vacancyRate == 0) {
             throw new FullParkingLotException("All parking lots are full!");
         }
 

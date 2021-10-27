@@ -2,12 +2,15 @@ package com.example.AEPB;
 
 import com.example.AEPB.exception.FullParkingLotException;
 import com.example.AEPB.parkingLot.ParkingBoy;
-import com.example.AEPB.parkingLot.ParkingLots;
+import com.example.AEPB.parkingLot.ParkingLot;
 import com.example.AEPB.parkingLot.ParkingTicket;
 import com.example.AEPB.parkingLot.Vehicle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ParkingBoyTest {
 
@@ -15,8 +18,11 @@ public class ParkingBoyTest {
 
     @BeforeEach
     void setup() {
-
-        this.parkingBoy = new ParkingBoy(new ParkingLots());
+        List<ParkingLot> parkingLots = new ArrayList<>(10);
+        for(int i = 0; i < 10; i++) {
+            parkingLots.add(new ParkingLot(i + 1, 50));
+        }
+        this.parkingBoy = new ParkingBoy(parkingLots);
     }
 
     /**
@@ -109,7 +115,7 @@ public class ParkingBoyTest {
         Vehicle vehicle = new Vehicle();
         ParkingTicket ticket = parkingBoy.park(vehicle);
 
-        Vehicle pickedUpVehicle = parkingBoy.pickUpVehicle(ticket);
+        Vehicle pickedUpVehicle = parkingBoy.pickup(ticket);
 
         Assertions.assertEquals(vehicle, pickedUpVehicle);
     }
@@ -122,7 +128,7 @@ public class ParkingBoyTest {
      */
     @Test
     void should_throw_exception_when_pick_up_car_given_no_ticket_to_parking_boy() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parkingBoy.pickUpVehicle(null));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> parkingBoy.pickup(null));
     }
 
     /**
@@ -135,9 +141,9 @@ public class ParkingBoyTest {
     void should_throw_exception_when_pick_up_car_given_valid_ticket_to_parking_boy() {
         ParkingTicket ticket = parkingBoy.park(new Vehicle());
 
-        Vehicle pickedUpVehicle = parkingBoy.pickUpVehicle(ticket);
+        Vehicle pickedUpVehicle = parkingBoy.pickup(ticket);
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parkingBoy.pickUpVehicle(ticket));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> parkingBoy.pickup(ticket));
     }
 
     /**
@@ -151,6 +157,6 @@ public class ParkingBoyTest {
         ParkingTicket ticket = parkingBoy.park(new Vehicle());
 
         ParkingTicket forgedTicket = new ParkingTicket(ticket.getParingLotNumber());
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parkingBoy.pickUpVehicle(forgedTicket));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> parkingBoy.pickup(forgedTicket));
     }
 }
